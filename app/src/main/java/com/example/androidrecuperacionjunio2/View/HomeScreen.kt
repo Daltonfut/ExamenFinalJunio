@@ -1,6 +1,9 @@
 package com.example.androidrecuperacionjunio2.View
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -13,10 +16,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import com.example.androidrecuperacionjunio2.Model.Articulo
 import com.example.androidrecuperacionjunio2.ViewModel.ArticuloViewModel
 
@@ -37,9 +42,9 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2E7D32))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00489a))
             ) {
-                Text("Agregar jugador", color = Color.White)
+                Text("Agregar Artículo", color = Color.White)
             }
         }
     ) { pad ->
@@ -56,12 +61,12 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Plantilla temporada 25/26",
+                    text = "Tienda oficial",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
                 IconButton(onClick = onLogout) {
-                    Icon(Icons.Default.ExitToApp, contentDescription = "Cerrar Sesión")
+                    Icon(Icons.Default.Delete, contentDescription = "Cerrar Sesión")
                 }
             }
 
@@ -90,7 +95,45 @@ fun ArticuloItem(articulo: Articulo,onDelete:()->Unit){
    Card(
        modifier = Modifier
            .fillMaxWidth()
+           .height(150.dp)
+           .background(Color.Cyan)
    ) {
+        Column(
+            verticalArrangement = Arrangement.Center
+        ) {
+            AsyncImage(
+                model = articulo.imagen,
+                contentDescription = null
+            )
+            Row(
+                modifier = Modifier.
+                fillMaxWidth()
+            ) {
+                Column(
+                ) {
+                    Text(text = articulo.nombre)
 
+                    Text("${articulo.precio}")
+                }
+                Spacer(modifier = Modifier
+                    .width(30.dp))
+
+                IconButton(
+                    onClick = {
+                        onDelete()
+                    }
+                ) {
+                    Icon(Icons.Default.Delete, contentDescription = null)
+                }
+
+                Button(
+                    onClick = {
+
+                    }
+                ) {
+                    Text("Comprar")
+                }
+            }
+        }
    }
 }

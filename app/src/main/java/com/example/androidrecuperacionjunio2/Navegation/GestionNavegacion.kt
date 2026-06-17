@@ -40,7 +40,13 @@ fun GestionNavegacion(auth: FirebaseAuth) {
                 )
             }
             entry<Routes.NuevoArticuloScreen>{
-                NuevoArticuloScreen()
+                NuevoArticuloScreen(
+                    onBackOn = {
+                        if (pilaNavegacion.size>1){
+                            pilaNavegacion.removeLastOrNull()
+                        }
+                    }
+                )
             }
             entry<Routes.Error>{
                 Error(" Se ha producido un error")

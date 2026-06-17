@@ -123,7 +123,8 @@ fun LoginScreen(auth: FirebaseAuth,onLoginOk:()-> Unit) {
                     Button(
                         onClick = {
                             error=false
-                        }
+                        },
+                        colors = ButtonDefaults.buttonColors(Color(0xFF00489a))
                     ) {
                         Text("Aceptar")
                     }

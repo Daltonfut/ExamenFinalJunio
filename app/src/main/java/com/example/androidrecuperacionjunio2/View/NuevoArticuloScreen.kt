@@ -22,15 +22,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.androidrecuperacionjunio2.ViewModel.ArticuloViewModel
 
 @Composable
-fun NuevoArticuloScreen() {
+fun NuevoArticuloScreen(vm: ArticuloViewModel= viewModel(),onBackOn:()-> Unit) {
     var nombre by rememberSaveable {
         mutableStateOf("")
     }
@@ -96,7 +99,7 @@ fun NuevoArticuloScreen() {
             Box(
                 modifier = Modifier
                     .clickable{
-
+                        oferta=true
                     }
             )
             Spacer(modifier = Modifier
@@ -112,8 +115,14 @@ fun NuevoArticuloScreen() {
         ) {
             Button(
                 onClick = {
+                    val newPrecio =precio.toDoubleOrNull()?:0.0
+                    val stock1 = stock.toInt()
+                    vm.agregarArticulo(nombre,newPrecio,oferta=oferta,stock1,imagen){
+                        onBackOn()
+                    }
 
-                }
+                },
+                colors = ButtonDefaults.buttonColors(Color(0xFF00489a))
             ) {
                 Text("Agregar Artículo")
             }
@@ -121,18 +130,13 @@ fun NuevoArticuloScreen() {
             Spacer(modifier = Modifier.width(30.dp))
             Button(
                 onClick = {
-
+                    onBackOn()
                 },
-                colors = ButtonDefaults.buttonColors()
+                colors = ButtonDefaults.buttonColors(Color.Red)
             ) {
                 Text("Cancelar")
             }
         }
 
     }
-}
-@Preview(showBackground = true)
-@Composable
-fun PreviewArticulo(){
-    NuevoArticuloScreen()
 }
