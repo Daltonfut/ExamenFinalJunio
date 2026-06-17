@@ -30,7 +30,14 @@ fun GestionNavegacion(auth: FirebaseAuth) {
                 )
             }
             entry<Routes.HomeScreen>{
-                HomeScreen()
+                HomeScreen(
+                    onNavigateToNuevo = {
+                        pilaNavegacion.add(Routes.NuevoArticuloScreen)
+                    },
+                    onLogout = {
+                        pilaNavegacion.removeLastOrNull()
+                    }
+                )
             }
             entry<Routes.NuevoArticuloScreen>{
                 NuevoArticuloScreen()
