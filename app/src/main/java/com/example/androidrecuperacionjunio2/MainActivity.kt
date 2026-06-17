@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.androidrecuperacionjunio2.Navegation.GestionNavegacion
 import com.example.androidrecuperacionjunio2.ui.theme.AndroidRecuperacionJunio2Theme
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AndroidRecuperacionJunio2Theme {
-
+                GestionNavegacion(auth=auth)
             }
         }
     }
